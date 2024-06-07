@@ -1,0 +1,5 @@
+{
+  "C_Cpp.vcFormat.indent.withinParentheses": "alignToParenthesis",
+  "C_Cpp.autocompleteAddParentheses": true,
+  "editor.autoClosingDelete": "auto"
+}
