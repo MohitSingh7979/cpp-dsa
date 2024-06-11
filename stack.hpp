@@ -76,7 +76,7 @@ public:
     return 0;
   }
 
-  int pop(int *removed_elem)
+  int pop(int* removed_elem)
   { // to remove item from top
     if (is_empty())
     {
@@ -92,7 +92,7 @@ public:
     return 0;
   }
 
-  int peek(int *top_elem)
+  int peek(int* top_elem)
   { /* to retrieve top elem */
     /* return array[elems_count - 1]; */
     if (is_empty())

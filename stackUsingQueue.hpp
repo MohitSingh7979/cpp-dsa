@@ -37,13 +37,12 @@ public:
   }
   int push(int elem) { return queue.enque(elem); }
 
-  // int pop() {}
+  int pop() {}
 };
 
 void test() {
   Stack s;
-  cout << s.is_empty();
-  cout << s.is_filled();
-  cout << s.size();
-
+  cout << s.is_empty() << endl;
+  cout << s.is_filled() << endl;
+  cout << s.size() << endl;
 }

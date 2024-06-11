@@ -1,13 +1,15 @@
 // header file
 // pragma once /* advanced */
 
+#pragma once
+
 #include <iostream>
 
 using namespace std;
 
 /*
 ABBR
-// title
+title
 # subtitle
 -> definition
 - subtopics
@@ -32,51 +34,78 @@ FIFO -> FIRST IN FIRST OUT
 
  */
 
+
+
 class Queue {
-public:
   static const int CAPACITY = 100;
   int array[CAPACITY];
   int elem_count = 0;
 
+public:
   int size() { return elem_count; }
-
   bool is_empty() { return elem_count == 0; }
-
   bool is_filled() { return elem_count == CAPACITY; }
 
-  int front(int *elem) { /* front:1 -> [1,2,3] */
+  /* bound checking imp */
+  int front(int* elem) {  // front:1 -> [1,2,3]
     if (is_empty()) {
       return -1;
     }
+    /* todo why not &array[0] */
     *elem = array[0];
     return 0;
   }
 
   int enque(int elem) { /* [1,2,3] */
-    if (is_filled()) {
+    if (is_filled())
+    {
       return -1;
     }
-/* elem_count */
+    /* elem_count */
+
     array[elem_count] = elem; /* [1,2,3,4] enque:4 */
     elem_count += 1;
 
     return 0;
   }
 
-  int deque(int *front_elem) {
-    if (is_empty()) {
-      cout << "queue empty" << endl;
+  int deque(int* front_elem) {
+    if (is_empty())
+    {
       return -1;
     }
 
     // *front_elem = array[0];
     front(front_elem);
+    /* [1,2,3,4] elem_count:4 */
+    /* [0 1 2 3] index */
 
-    for (int i = 0; i < elem_count - 1; i++) {
+    /* [2,3,4] elem_count:3 */
+    /* [0 1 2]  index */
+
+    elem_count -= 1;
+    for (int i = 0; i < elem_count; i++) {
       array[i] = array[i + 1];
     }
-    elem_count -= 1;
 
     return 0;
   }
+};
+
+int test() {
+  // solved: resolve segmentation fault
+  Queue q;
+  q.enque(3);
+  q.enque(4);
+  cout << q.is_empty() << endl;
+  cout << q.is_filled() << endl;
+  cout << q.size() << endl;
+
+  while (!q.is_empty()) {
+    // int* p; /* reseaon for segmentation fault */
+    int a;
+    q.deque(&a);
+    cout << a;
+  }
+  return 0;
 };

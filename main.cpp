@@ -1,7 +1,6 @@
-#include "stack.hpp"
+#include "doubly_linked_list.hpp"
 
-int main()
-{
+int main() {
   test();
   return 0;
 };
