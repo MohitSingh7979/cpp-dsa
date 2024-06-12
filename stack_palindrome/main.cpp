@@ -13,7 +13,8 @@ int main() {
   string t;
   for (int i = 0; i < s.length(); i++){
     int temp = s1.pop();
-    t.push_back(temp);
+    int a = temp;
+    t.push_back(a);
   }
   // cout << c << endl;
   if (s==t){

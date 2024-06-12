@@ -24,7 +24,9 @@
  */
 
 #include <iostream>
+#include <assert.h>
 using namespace std;
+#define assertm(exp, msg) assert(((void)msg, exp))
 
 struct Node
 {
@@ -35,12 +37,12 @@ struct Node
 
 class Doubly_ll
 {
-  Node *head = nullptr;
-  Node *tail = nullptr;
   int item_count = 0;
 
 public:
-  
+  Node *head = nullptr;
+  Node *tail = nullptr;
+
   bool is_empty() {
     // todo changed back
     return head == nullptr && tail == nullptr;
@@ -113,20 +115,29 @@ public:
   }
 };
 
+void test_insert_at_head(){
+  Doubly_ll dll;
+
+  dll.insert_at_head(3);
+  dll.insert_at_head(4);
+
+  int expected[] = {4,3,4,4,3};
+  int output[5] = {};
+  
+  output[0]= dll.head->data;
+
+  output[1]=dll.head->next_node->data;
+  output[2]=dll.head->next_node->pre_node->data;
+  output[3]=dll.get_head();
+  output[4] = dll.get_tail();
+  for (int i = 0;i < 5;i++){
+    assertm(output[i]==expected[i],"recheck insert_at_head()");
+  }
+  cout << "successful inserting at head\n";
+}
+
 
 void test() {
-  Doubly_ll dll;
-  /*
-    dll.insert_at_head(3);
-    dll.insert_at_head(4);
-
-    cout << dll.head->data << endl;//4
-    cout << dll.head->next_node->data << endl;//3
-    cout << dll.head->next_node->pre_node->data << endl;//4
-
-    cout << dll.head << endl;
-    cout << dll.tail << endl;
-  */
   /*
     dll.insert_at_head(3);
     dll.insert_at_head(4);
@@ -144,7 +155,7 @@ void test() {
   dll.insert_at_tail(5);
   cout << dll.get_tail() << endl;
   */
-  // /*
+  /*
   // todo fix this
   dll.insert_at_tail(3);
   dll.insert_at_tail(4);
@@ -167,6 +178,7 @@ void test() {
   // while (!is_empty()) {
   // }
 
-  // */
+  */
 
+  test_insert_at_head();
 }

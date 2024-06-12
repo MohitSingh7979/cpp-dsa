@@ -19,8 +19,8 @@ int main() {
    */
 
   bool is_palindrome = true;
-  for (int i = 0; i < len / 2; i++){//* t:n/2
-    int di = i + len / 2 + (len & 1);
+  for (int i = 0, di = i + len / 2 + (len & 1); i < len / 2; i++){//* t:n/2
+   
     if (s[len/2-i-1] != s[di]){ is_palindrome = false; break; }
   }
   if (is_palindrome){
