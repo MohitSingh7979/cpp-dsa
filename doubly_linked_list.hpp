@@ -35,48 +35,36 @@ struct Node
 
 class Doubly_ll
 {
+  Node *head = nullptr;
+  Node *tail = nullptr;
   int item_count = 0;
 
 public:
-  Node *head = nullptr;
-  Node *tail = nullptr;
+  
+  bool is_empty() {
+    // todo changed back
+    return head == nullptr && tail == nullptr;
+  }
+  int size() { return item_count; }
 
-  bool is_empty()
-  {
-    return head == nullptr;
-  }
-  int size()
-  {
-    return item_count;
-  }
+  int get_head() { return head->data; }
+  int get_tail() { return tail->data; }
 
-  int get_head()
-  {
-    return head->data;
-  }
-  int get_tail()
-  {
-    return tail->data;
-  }
-
-  void insert_at_head(int elem)
-  {
-    if (head == nullptr && tail == nullptr)
-    {
-      tail = head = new Node{nullptr, elem, head};
+  void insert_at_head(int elem) {
+    if (is_empty()) {
+      tail = head = new Node{nullptr, elem, nullptr/* why head, not nullpointer */};
+      item_count += 1;
     }
-    else
-    {
-
+    else {
       head->pre_node = new Node{nullptr, elem, head};
-      ;
       head = head->pre_node;
+      item_count += 1;
 
-      /*
-      Node* old_head = head;
-      head = new Node{ nullptr,elem,old_head};
-      old_head->pre_node = head;
-       */
+      /* // optional verbose
+        Node* old_head = head;
+        head = new Node{ nullptr,elem,old_head};
+        old_head->pre_node = head;
+      */
     }
     /*
     {n<-5<-4->3->n},h={n,4,{n,3,n}},t={n,3,n}
@@ -92,27 +80,93 @@ public:
       */
   }
 
-  // todo
-  int remove_at_head() {}
+  void remove_at_head() {
+    if (!is_empty()){
+      head = head->next_node;
+      head->pre_node = nullptr;
+      item_count -= 1;
+    };
+    /*
+    {n,3,{r=3,2,n}}, h={n,3,{r=3,2,n}} t={{n,3,r=2},2,n}
+    {n,3,n}
+    */
+  };
 
-  // todo
-  void insert_at_tail() {}
+  void insert_at_tail(int elem) {
+    if (is_empty()){
+      insert_at_head(elem);
 
-  // todo
-  void remove_at_tail() {}
+    }
+    else{
+      tail = tail->pre_node = new Node{tail, elem, nullptr};
+      item_count += 1;
+    }
+  }
+
+  // 
+  void remove_at_tail() {
+    if (!is_empty()){
+      tail = tail->pre_node;
+      tail->next_node = nullptr;
+      item_count -= 1;
+    };
+  }
 };
+
 
 void test() {
   Doubly_ll dll;
+  /*
+    dll.insert_at_head(3);
+    dll.insert_at_head(4);
 
-  dll.insert_at_head(3);
-  dll.insert_at_head(4);
+    cout << dll.head->data << endl;//4
+    cout << dll.head->next_node->data << endl;//3
+    cout << dll.head->next_node->pre_node->data << endl;//4
 
-  cout << dll.head->data << endl;//4
-  cout << dll.head->next_node->data << endl;//3
-  cout << dll.head->next_node->pre_node->data << endl;//4
+    cout << dll.head << endl;
+    cout << dll.tail << endl;
+  */
+  /*
+    dll.insert_at_head(3);
+    dll.insert_at_head(4);
+    dll.remove_at_head();
+    cout << dll.head->data << endl;//3
+  */
+  /*
+  dll.insert_at_tail(3);
+  cout << dll.get_head() << endl;
+  cout << dll.get_tail() << "\n\n";
 
-  cout << dll.head << endl;
-  cout << dll.tail << endl;
+  dll.insert_at_tail(4);
+  cout << dll.get_tail() << endl;
+
+  dll.insert_at_tail(5);
+  cout << dll.get_tail() << endl;
+  */
+  // /*
+  // todo fix this
+  dll.insert_at_tail(3);
+  dll.insert_at_tail(4);
+  dll.insert_at_tail(5);
+  dll.insert_at_tail(6);
+
+  cout << dll.get_head() << endl;
+  cout << dll.get_tail() << "\n\n";
+  dll.remove_at_tail();
+
+  cout << dll.get_tail() << endl;
+  dll.remove_at_tail();
+
+  cout << dll.get_tail() << endl;
+  dll.remove_at_tail();
+
+  cout << dll.get_tail() << endl;
+  cout << dll.get_tail() << endl;
+
+  // while (!is_empty()) {
+  // }
+
+  // */
 
 }

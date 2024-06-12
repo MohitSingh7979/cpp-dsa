@@ -80,7 +80,6 @@ public:
   { // to remove item from top
     if (is_empty())
     {
-      cout << "underflow stack";
       return -1;
     }
 
