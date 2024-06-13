@@ -126,26 +126,32 @@ public:
   // todo traverse
 };
 
+void assert_linked_list(Doubly_ll *dll, int *expected_arr, int expected_length){
+  Node *temp = dll->head;
+  int i = 0;
+  while (temp != nullptr){
+    int output = temp->data;
+    int expected = expected_arr[i++];
+
+    ASSERT(output == expected, "expected:" << expected << "\toutput:" << output);
+    temp = temp->next_node;
+  }
+  
+  ASSERT(i == expected_length, "elem count mismatch");
+}
+
+
 void test_insert_at_head(){
   Doubly_ll dll;
 
   dll.insert_at_head(3);
   dll.insert_at_head(4);
+  dll.remove_at_head();
 
-  int test_data[][2] = {
-    {dll.head->data, 4},
-    {dll.head->next_node->data, 3},
-    {dll.head->next_node->pre_node->data, 4},
-    {dll.get_head(), 4},
-    {dll.get_tail(), 3},
-  };
 
-  for (int i = 0;i < 5;i++){
-    int expected = test_data[i][1];
-    int output = test_data[i][0];
+  int *expected = new int[1]{3};
+  assert_linked_list(&dll, expected, 1);
 
-    ASSERT(output == expected, "expected " << expected << "output" << output);
-  }
   cout << "successful insert at head\n";
 }
 
