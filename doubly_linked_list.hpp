@@ -24,19 +24,29 @@
  */
 
 #include <iostream>
+#include<sstream>
 #include <assert.h>
 using namespace std;
-#define assertm(exp, msg) assert(((void)msg, exp))
+#ifndef NDEBUG
+#   define ASSERT(condition, message) \
+    do { \
+        if (! (condition)) { \
+            std::cerr << "Assertion `" #condition "` failed in " << __FILE__ \
+                      << " line " << __LINE__ << ": " << message << std::endl; \
+            std::terminate(); \
+        } \
+    } while (false)
+#else
+#   define ASSERT(condition, message) do { } while (false)
+#endif
 
-struct Node
-{
+struct Node {
   Node *pre_node;
   int data;
   Node *next_node;
 };
 
-class Doubly_ll
-{
+class Doubly_ll {
   int item_count = 0;
 
 public:
@@ -44,7 +54,7 @@ public:
   Node *tail = nullptr;
 
   bool is_empty() {
-    // todo changed back
+    // todo changed back optional
     return head == nullptr && tail == nullptr;
   }
   int size() { return item_count; }
@@ -105,7 +115,6 @@ public:
     }
   }
 
-  // 
   void remove_at_tail() {
     if (!is_empty()){
       tail = tail->pre_node;
@@ -113,6 +122,8 @@ public:
       item_count -= 1;
     };
   }
+
+  // todo traverse
 };
 
 void test_insert_at_head(){
@@ -121,64 +132,115 @@ void test_insert_at_head(){
   dll.insert_at_head(3);
   dll.insert_at_head(4);
 
-  int expected[] = {4,3,4,4,3};
-  int output[5] = {};
-  
-  output[0]= dll.head->data;
+  int test_data[][2] = {
+    {dll.head->data, 4},
+    {dll.head->next_node->data, 3},
+    {dll.head->next_node->pre_node->data, 4},
+    {dll.get_head(), 4},
+    {dll.get_tail(), 3},
+  };
 
-  output[1]=dll.head->next_node->data;
-  output[2]=dll.head->next_node->pre_node->data;
-  output[3]=dll.get_head();
-  output[4] = dll.get_tail();
   for (int i = 0;i < 5;i++){
-    assertm(output[i]==expected[i],"recheck insert_at_head()");
+    int expected = test_data[i][1];
+    int output = test_data[i][0];
+
+    ASSERT(output == expected, "expected " << expected << "output" << output);
   }
-  cout << "successful inserting at head\n";
+  cout << "successful insert at head\n";
 }
 
+void test_remove_at_head(){
+  Doubly_ll dll;
+  int expected[] = {1, 4, 1};
+  int output[3] = {};
 
-void test() {
+  dll.insert_at_head(1);
+  output[0] = dll.get_head();
+
+  dll.insert_at_head(4);
+  output[1] = dll.get_head();
+
+  dll.remove_at_head();
+  output[2] = dll.get_head();
+
+
   /*
-    dll.insert_at_head(3);
-    dll.insert_at_head(4);
-    dll.remove_at_head();
-    cout << dll.head->data << endl;//3
-  */
-  /*
+  for (int i = 0;i < 5;i++){
+    output[i] = dll.get_head();
+  }
+   */
+
+  for (int i = 0;i < 3;i++){
+    ASSERT(output[i] == expected[i], "\texpected:" << expected[i] << " output:" << output[i]);
+  }
+  cout << "successful remove at head\n";
+
+}
+
+void test_insert_at_tail(){
+  Doubly_ll dll;
+
+  int expected[] = {3, 4, 5, 6, 7};
+  int output[5] = {};
+
   dll.insert_at_tail(3);
-  cout << dll.get_head() << endl;
-  cout << dll.get_tail() << "\n\n";
-
+  output[0] = dll.get_tail();
   dll.insert_at_tail(4);
-  cout << dll.get_tail() << endl;
-
+  output[1] = dll.get_tail();
   dll.insert_at_tail(5);
-  cout << dll.get_tail() << endl;
-  */
-  /*
+  output[2] = dll.get_tail();
+  dll.insert_at_tail(6);
+  output[3] = dll.get_tail();
+  dll.insert_at_tail(7);
+  output[4] = dll.get_tail();
+
+  /* for (int i = 0;i < 5;i++){
+    output[i] = dll.get_tail();
+  } */
+
+  for (int i = 0;i < 5;i++){
+    ASSERT(output[i] == expected[i], "\texpected:" << expected[i] << " output:" << output[i]);
+  }
+  cout << "successful insert at tail\n";
+
+}
+
+void test_remove_at_tail(){
+  Doubly_ll dll;
+
+  int expected[] = {3, 4, 5, 6, 5, 4, 3};
+  int output[5] = {};
+
   // todo fix this
   dll.insert_at_tail(3);
+  output[0] = dll.get_tail();
   dll.insert_at_tail(4);
+  output[1] = dll.get_tail();
   dll.insert_at_tail(5);
+  output[2] = dll.get_tail();
   dll.insert_at_tail(6);
-
-  cout << dll.get_head() << endl;
-  cout << dll.get_tail() << "\n\n";
+  output[3] = dll.get_tail();
   dll.remove_at_tail();
-
-  cout << dll.get_tail() << endl;
+  output[4] = dll.get_tail();
   dll.remove_at_tail();
-
-  cout << dll.get_tail() << endl;
+  output[5] = dll.get_tail();
   dll.remove_at_tail();
+  output[6] = dll.get_tail();
 
-  cout << dll.get_tail() << endl;
-  cout << dll.get_tail() << endl;
+  /* for (int i = 0;i < 5;i++){
+    output[i] = dll.get_tail();
+  } */
 
-  // while (!is_empty()) {
-  // }
+  for (int i = 0;i < 5;i++){
+    ASSERT(output[i] == expected[i], "\texpected:" << expected[i] << " output:" << output[i]);
+  }
+  cout << "successful remove at tail\n";
 
-  */
+}
 
+void test() {
   test_insert_at_head();
+  // test_remove_at_head();
+  // test_insert_at_tail();
+  // test_remove_at_tail();
 }

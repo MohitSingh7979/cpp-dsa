@@ -1,4 +1,3 @@
-
 /*
 ABBR
 // title
@@ -60,11 +59,8 @@ public:
   bool is_filled() { return elems_count == Stack::CAPACITY; }
 
   // to insert element to the top
-  int push(int elem)
-  {
-    if (is_filled())
-    {
-      cout << "overflow stack";
+  int push(int elem) {
+    if (is_filled()) {//~ overflow
       return -1;
     }
 
@@ -76,10 +72,8 @@ public:
     return 0;
   }
 
-  int pop(int* removed_elem)
-  { // to remove item from top
-    if (is_empty())
-    {
+  int pop(int* removed_elem) { // to remove item from top
+    if (is_empty()) { //~ underflow
       return -1;
     }
 
@@ -91,11 +85,9 @@ public:
     return 0;
   }
 
-  int peek(int* top_elem)
-  { /* to retrieve top elem */
+  int peek(int* top_elem) { /* to retrieve top elem */
     /* return array[elems_count - 1]; */
-    if (is_empty())
-    {
+    if (is_empty()) {
       return -1;
     }
     *top_elem = array[elems_count - 1];

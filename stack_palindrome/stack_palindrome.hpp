@@ -1,5 +1,6 @@
 #include<iostream>
 using namespace std;
+#include "ankush_stack.hpp"
 /*
   t-> time
   s-> space
@@ -10,7 +11,6 @@ using namespace std;
   ! -> imporvements
 */
 // palindrome
-#include "ankush_stack.hpp"
 int main(){
   Stack st;
   string s = "racecar";
