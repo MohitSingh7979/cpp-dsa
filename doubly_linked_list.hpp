@@ -23,6 +23,9 @@
 
  */
 
+// todo insert at any point / ARBITRARY POINT / index
+// todo remove at any point / ARBITRARY POINT / index
+
 #include <iostream>
 #include<sstream>
 #include <assert.h>
@@ -128,16 +131,17 @@ public:
 
 void assert_linked_list(Doubly_ll *dll, int *expected_arr, int expected_length){
   Node *temp = dll->head;
-  int i = 0;
+  int index = 0;
+
   while (temp != nullptr){
     int output = temp->data;
-    int expected = expected_arr[i++];
+    int expected = expected_arr[index++];/* assigning values */
 
     ASSERT(output == expected, "expected:" << expected << "\toutput:" << output);
     temp = temp->next_node;
   }
-  
-  ASSERT(i == expected_length, "elem count mismatch");
+
+  ASSERT(index == expected_length, "elem count mismatch");
 }
 
 
@@ -180,7 +184,6 @@ void test_remove_at_head(){
     ASSERT(output[i] == expected[i], "\texpected:" << expected[i] << " output:" << output[i]);
   }
   cout << "successful remove at head\n";
-
 }
 
 void test_insert_at_tail(){
@@ -246,7 +249,7 @@ void test_remove_at_tail(){
 
 void test() {
   test_insert_at_head();
-  // test_remove_at_head();
-  // test_insert_at_tail();
-  // test_remove_at_tail();
+  test_remove_at_head();
+  test_insert_at_tail();
+  test_remove_at_tail();
 }

@@ -2,6 +2,9 @@
 #include <iostream>
 using namespace std;
 
+// todo insert at any point / ARBITRARY POINT / index
+// todo remove at any point / ARBITRARY POINT / index
+
 /*
  * LinkedList
  * dynamic sizing
@@ -31,7 +34,9 @@ using namespace std;
  *  data
  *  address (next or NULL)
  *
+ *
  * */
+
 
 struct Node {
   int data;
