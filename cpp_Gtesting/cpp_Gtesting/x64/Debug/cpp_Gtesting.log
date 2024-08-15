@@ -1,6 +1,0 @@
-﻿  pch.cpp
-  test.cpp
-C:\Users\Me\Downloads\programming\cpp-dsa\cpp_Gtesting\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\internal\gtest-port.h(1804): warning C26495: Variable 'testing::internal::Mutex::owner_thread_id_' is uninitialized. Always initialize a member variable (type.6).
-C:\Users\Me\Downloads\programming\cpp-dsa\cpp_Gtesting\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\internal\gtest-port.h(1804): warning C26495: Variable 'testing::internal::Mutex::type_' is uninitialized. Always initialize a member variable (type.6).
-C:\Users\Me\Downloads\programming\cpp-dsa\cpp_Gtesting\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\internal\gtest-port.h(1804): warning C26495: Variable 'testing::internal::Mutex::critical_section_' is uninitialized. Always initialize a member variable (type.6).
-C:\Users\Me\Downloads\programming\cpp-dsa\cpp_Gtesting\packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7\build\native\include\gtest\internal\gtest-port.h(1804): warning C26495: Variable 'testing::internal::Mutex::critical_section_init_phase_' is uninitialized. Always initialize a member variable (type.6).

@@ -10,8 +10,12 @@ struct Node {
 };
 
 class circular_linked_list {
+	// todo move head here
 public:
 	Node *head = nullptr;
+	// construction
+	// circular_linked_list() : head(nullptr) {};
+
 	int elem_count = 0;
 	//Node* tail = nullptr;
 
@@ -39,6 +43,7 @@ public:
 		else {
 			head = new Node;
 			head->data = elem;
+			head->next_node = head;
 		}
 		elem_count += 1;
 	}
@@ -90,23 +95,27 @@ void test_remove_at_head(){
 	cll.remove_at_head();
 
 	int size = 1;
+
+	//todo use vector 
 	// std::vector<int> expected = {11};
 
 	int *expected = new int[size]{11};
 	assert_circular_linked_list(&cll, expected, size);
 
 	std::cout << "successful removal at head\n";
-
-}
-
-void test_insert_at_tail(){
-	circular_linked_list cll;
-
-	
 }
 
 void test(){
-	test_insert_at_head();
-	test_remove_at_head();
+	circular_linked_list cll;
+
+	cll.insert_at_head(11);
+	cll.insert_at_head(21);
+	cll.insert_at_head(31);
+	std::cout << cll.head->next_node->next_node->next_node->next_node->data<<std::endl;
+	// std::cout << cll.get_head();
+
+
+	// test_insert_at_head();
+	// test_remove_at_head();
 
 }
